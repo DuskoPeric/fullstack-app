@@ -1,0 +1,39 @@
+.flex{
+    display: flex;
+}
+.field-holder {
+    margin-top: 30px;
+  }
+  .field-holder input {
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px #ffffff5e;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0px;
+    font-size: 16px;
+    color: #7fdab5;
+  }
+  .field-holder input:focus-visible {
+    outline: none;
+  }
+  .field-holder label {
+    font-weight: 700;
+    display: block;
+  }
+  .btn {
+    background: #519a96;
+    border: none;
+    padding: 12px;
+    width: 200px;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  .custom-link {
+    color: #519a96;
+    margin-top: 10px;
+    text-decoration: none;
+    cursor: pointer;
+  }

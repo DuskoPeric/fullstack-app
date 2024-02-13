@@ -6,7 +6,12 @@ const jwt = require("jsonwebtoken");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+  },
+  active: {
+    type: Boolean,
+    required: true,
+    default: false
   },
   email: {
     type: String,
@@ -19,6 +24,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  avatar: {
+    type: Buffer,
+  },
   tokens: [
     {
       token: {
@@ -26,7 +34,13 @@ const userSchema = new mongoose.Schema({
         required: true
       }
     }
-  ]
+  ],
+  activationToken: {
+    type: String,
+  },
+  resetToken: {
+    type: String,
+  },
 });
 
 userSchema.statics.findByNameAndPassword = async (email, password) => {
@@ -59,7 +73,7 @@ userSchema.statics.isUserExist = async (name, email) => {
 
 userSchema.methods.generateToken = async function() {
   const user = this;
-  const token = jwt.sign({ id: user._id.toString() }, "pericdevelopment");
+  const token = jwt.sign({ id: user._id.toString() }, process.env.JWT_SECRET);
   user.tokens = user.tokens.concat({ token });
   await user.save();
   return token;
