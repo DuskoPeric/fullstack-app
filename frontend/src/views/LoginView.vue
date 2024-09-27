@@ -17,14 +17,15 @@ import {
   logInUser,
   getUserData,
   logOutUser,
-} from "../services/user.js";
+} from "../services/user.ts";
 import type { Ref } from 'vue'
 import LoginForm from '../components/LoginForm.vue'
 import UserInfo from '../components/UserInfo.vue'
+import { User } from "../types";
 
 const status = ref("login");
 
-const user = ref(null);
+const user :Ref<null|string> = ref(null);
 const token: Ref<string | null> = ref(null);
 const newUser = ref({
   email: "",
@@ -70,7 +71,7 @@ async function setUser() {
   }
 };
 async function logIn() {
-  const loginData: any = { ...newUser.value };
+  const loginData: User = { ...newUser.value };
   delete loginData.name;
   try {
     const response = await logInUser(loginData);

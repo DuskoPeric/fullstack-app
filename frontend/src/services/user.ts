@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User } from "../types";
 
 axios.defaults.baseURL = "http://localhost:3031";
 
@@ -15,23 +16,23 @@ export function getUserData(token:string|null) {
     });
 }
 
-export async function setNewUser(data) {
+export async function setNewUser(data: User) {
   try {
     return await axios.post("/user", data);
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error.response.data);
   }
 }
 
-export async function logInUser(data) {
+export async function logInUser(data: User) {
   try {
     return await axios.post("/login", data);
-  } catch (error) {
+  } catch (error:any) {
     throw new Error(error.response.data);
   }
 }
 
-export async function logOutUser(token) {
+export async function logOutUser(token:string|null) {
   try {
     return await axios.post(
       "/logout",
@@ -40,31 +41,31 @@ export async function logOutUser(token) {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-  } catch (error) {
+  } catch (error :any) {
     throw new Error(error.response.data);
   }
 }
 
-export async function confirmUserEmail(token) {
+export async function confirmUserEmail(token: string) {
   try {
     return await axios.get(`/${token}/confirm`);
-  } catch (error) {
+  } catch (error:any) {
     throw new Error(error.response.data);
   }
 }
 
-export async function resetPassword(email) {
+export async function resetPassword(email: string) {
   try {
     return await axios.post("/send-email", { email });
-  } catch (error) {
+  } catch (error :any) {
     throw new Error(error.response.data);
   }
 }
 
-export async function setPassword(token, password) {
+export async function setPassword(token:string, password:string) {
   try {
     return await axios.post("/set-password", { token, password });
-  } catch (error) {
+  } catch (error:any) {
     throw new Error(error.response.data);
   }
 }
