@@ -4,7 +4,7 @@
   "description": "backend for login",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "env-cmd -f ./config/test.env jest",
     "start": "node src/index.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.js"
   },
@@ -21,6 +21,7 @@
     "mongoose": "^7.6.2",
     "nodemon": "^3.0.1",
     "randombytes": "^2.1.0",
+    "supertest": "^6.3.4",
     "validator": "^13.11.0"
   }
 }

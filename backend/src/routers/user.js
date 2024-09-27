@@ -11,7 +11,7 @@ const router = new express.Router();
 router.get("/user", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    res.send(user);
+    res.status(200).send(user);
   } catch (error) {
     res.status(500).send();
   }
@@ -27,7 +27,7 @@ router.post("/user", async (req, res) => {
     await user.save();
     sendConfirmationEmail(req.body.email, req.body.name, activationToken);
     await user.generateToken();
-    res.send(user);
+    res.status(201).send(user);
   } catch (err) {
     //console.log(Object.keys(err.errors))
     res.status(500).send(err.message);
@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
       throw new Error('You are not confirm email');
     }
     const token = await user.generateToken();
-    res.send({ user, token });
+    res.status(200).send({ user, token });
   } catch (err) {
     res.status(500).send(err.message);
   }
